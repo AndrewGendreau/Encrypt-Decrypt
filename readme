@@ -1,5 +1,5 @@
 #####################################################################################################################################
-# PROGRAMMER   : Sruthi Nyalamadugu, AndrewGendreau, Zahra Shabbir ali 
+# PROGRAMMER   : Sruthi Nyalamadugu, Andrew Gendreau, Zahra kankroli wala 
 # CLASS        : Sb16 CSC 534 Computer Security
 # PROFESSOR    : Dr. Lee
 # PROJECT      : Lab 2 a)Shift Encryption b)Shift Decryption c)Transposition Encryption. 
@@ -24,6 +24,9 @@ Files Included :  lab2.c
                   read_file.h
                   shiftEncrypt.c
                   shiftEncrypt.h
+                  plaintext.txt
+                  ciphertext.txt
+                  trans.c
                   makefile
                   readme
 
@@ -96,10 +99,24 @@ Algorithm      :  1).Shift Encryption:
                 3).Transposition Encryption:
                 Input:read the key from user
                 Procedure:
-                  a)Store the length of the key into column and then finding number of rows dividing the length key from plaintext length
-                  b)According to the row and column store the input plaintext into 2D array
-                  c)Everytime comparing the key so that to find the current column and to store the cipher text into the output 2D Array.
+                 a)Read the plain text from the input file
+                 b)To getting the number of columns strlen(key)-1
+                 c)To getting the number of rows we will devide strlen(key) by strlen(plaintxt)
+                 d)Will check whether strlen(plaintxt)%strlen(key)!=0,Then we will increase number of rows by the modulos function.
+                 e)Will store to 2D array from plain text
+                 f)Everytime we will compare the key and if encounters with the right keythen will store in the ciphertext 2D array
+                Output:It will print the encrypted plain text
+Sample Input and Output:
 
-Sample Input   : 
-                
-Sample Output  : 
+a)Shift Encryption:Sample Input:
+                   Enter the key:
+                   Sample Output:
+
+b)Shift Decryption:Sample Input:
+                   Enter the key:
+                   Sample Output:
+       
+c)Transposition Encryption:
+                   Sample Input:ihtsisartpsnisonotcnepyroit   
+                   Enter the key:321
+                   Sample Output:thisistranspositonencryption
