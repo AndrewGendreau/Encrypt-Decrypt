@@ -1,0 +1,102 @@
+#####################################################################################################################################
+# PROGRAMMER   : Sruthi Nyalamadugu, AndrewGendreau, Zahra Shabbir ali 
+# CLASS        : Sb16 CSC 534 Computer Security
+# PROFESSOR    : Dr. Lee
+# PROJECT      : Lab 2 a)Shift Encryption b)Shift Decryption c)Transposition Encryption. 
+# FILE CREATED : Aug 4, 2016
+# FILE UPDATED : Aug 9, 2016
+# DESCRIPTION  : This program is design for Shift Encryption, Shift Decryption, Transpose Encryption.
+######################################################################################################################################
+
+Program Description
+===================
+Language       :  C language
+
+Platform       :  Sloop
+
+Shell          :  tch Shell
+
+Files Included :  lab2.c 
+                  lab2.h
+                  linkedList.c
+                  linkedLidt.h
+                  read_file.c
+                  read_file.h
+                  shiftEncrypt.c
+                  shiftEncrypt.h
+                  makefile
+                  readme
+
+How to Compile :  To compile the program type "make" in the command prompt
+
+How to Run     :  ./lab2
+
+Known Bugs     :  1. With the shift decryption function, if the most common letter 
+		 in the plaintext is not E, the decrypted plaintext will not be correct.
+
+Algorithm      :  1).Shift Encryption:
+                  Input: Plaintext, encryption key
+		  Output: Encrypted Text and Original Plaintext.
+		  Procedure:
+		  Create an empty circular doubly linked list l.
+		  for every character in the plaintext:
+			insert character into l at the tail
+
+		  for every node i in l
+			change i.plaintext into uppercase
+			add key to the position of i.plaintext and store the result in r
+			if(r > 90)
+			r = r-90
+			r = representation of A in ASCII - 1 + r
+			
+			create buffer bp for plaintext
+			create buffer bc for ciphertext
+
+			for every node i in l
+				copy plaintext[i] bp[i]
+				copy ciphertext[i] to bc[i]
+				free l[i]
+
+
+		2).Shift Decryption:
+		Input: ciphertext 
+		Output: Key and decrypted ciphertext
+
+		Create an empty circular doubly linked list l
+	
+		allocate int to hold current max frequency
+		allocate char to hold most frequent character
+
+		for every character in the ciphertext
+			insert character[i] into l at the tail
+
+		allocate a frequency array called f of length 26
+
+		for all i from 0 to 25
+			f[i] = 0
+
+		for each node i in l
+			change i.char into uppercase if not already in it.
+			if(i.char >= 'A' && i.char <= 'Z'
+				f[i]++
+
+			if(f[i] > max)
+				max = frequency[i]
+				mostcommon = i.char
+
+		allocate int to hold assumed key
+		
+		assumedKey = max - position of most common letter in ASCII - position of E in ASCII
+
+		run above encryption algorithm going left using assumedKey as the key
+
+		print AssumedKey
+		print plain and cipher text using about buffer method		
+			
+                3).Transposition Encryption:
+                Input:read the key from user
+                procedure: 
+
+Sample Input   : 
+                
+Sample Output  : 
