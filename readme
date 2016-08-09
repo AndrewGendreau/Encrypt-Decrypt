@@ -95,7 +95,10 @@ Algorithm      :  1).Shift Encryption:
 			
                 3).Transposition Encryption:
                 Input:read the key from user
-                procedure: 
+                Procedure:
+                  a)Store the length of the key into column and then finding number of rows dividing the length key from plaintext length
+                  b)According to the row and column store the input plaintext into 2D array
+                  c)Everytime comparing the key so that to find the current column and to store the cipher text into the output 2D Array.
 
 Sample Input   : 
                 
