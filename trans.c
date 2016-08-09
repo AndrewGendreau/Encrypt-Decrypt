@@ -1,89 +1,51 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
+#define SIZE 500                                                    //declaring random size
 
-#define SIZE 500
-
-void encrypt(char *key, char *words)
+char* encrypt(char *key, char *words)                               //encrypting the plaintext function
 {
-    int kLen = strlen(key);
-    int wLen = strlen(words);
-	int row, col, value=1;
-	int i, j, k=0;
-	col = kLen;
-	if((wLen%kLen)!=0)
-	{
-		row = wLen/kLen;
-		row++;
-	}
-	else
-	{
-		row = wLen/kLen;
-	}
-	
-    char encr[row][col], cipher[row][col];
-    for(i=0;i<col;i++)
-	{
-		for(j=0;j<row;j++)
-		{
-			encr[i][j] = words[k];
-			k++;
-		//	printf("%c", encr[i][j]);
-		}
-	}
-	k=1;
-	i = 0;
-	int currentColumn;
-	currentColumn = 0;
-	while(key[i] != k)
-	{
-		i++;
-		currentColumn++;
-	}
-
-	for(i = 0; i< row; i++)
-	{
-		printf("%c", encr[i][currentColumn]);
-	}
-
-	printf("\n");
-	/*for(i=0;i<row;i++)
-	{
-		for(j=0;j<col;j++)
-		{
-		if((key[i]==value) && (value<=kLen))
-		{
-			cipher[i][j] = encr[i][k];
-			printf("%c", cipher[i][j]);
-			
-		}
-		k++;
-		value++;
-		
-	}
-	}
-*/	
+    int kLen = strlen(key);                                         //to get key length
+    int wLen = strlen(words)-1;                                     //to get plaintext length
+    int i, j, pos;
+    char* ciper=(char*)malloc(wLen*sizeof(char));
+    //printf("%d\n",wLen);
+    for(i=0;i<wLen;i+=kLen)                                        //run through plaintext character and increase i by kLen
+    {
+        for(j=0;j<kLen;j++)                                        //run through key
+        {
+            pos=key[j]-'0'-1;                                  //set the position of the character of the plaintext 
+            if(pos+i<wLen)
+            {
+            ciper[i+j]=words[i+pos];                           //store the character of the plaintext according to the key
+            printf("%c",ciper[i+j]);                           //and it is done by i+pos
+            }
+        }
+    }
+    return ciper;                                               //returning ciphertext
 }
 
-void main()
+int main()
 {
-	char ciphertext[SIZE], key[10], str[SIZE];
-	char *input;
-	FILE *fp = fopen("plaintext.txt", "r");
-//	FILE *fp1 = fopen("ciphertext.txt", "w");
-	if(fp == NULL)
-	{
-		printf("File doesnt exist");
-	}
-	while(fgets(str, sizeof(str), fp)!=NULL)
-	{
-		input = strtok(str, "\0");
-	}
-	printf("%s", input);
-	printf("Enter the key:");
-	fgets(key, SIZE, stdin);
-	encrypt(key, input);
-	//fprintf(fp1, "%s", ciphertext);
-	fclose(fp);
-//	fclose(fp1);
-}	
+    char key[10], str[SIZE];                                    //declaring variables
+    char *ciphertext;
+    FILE *fp = fopen("plaintext.txt", "r");                     //opening plaintext file to read the plaintext
+    FILE *fp1 = fopen("ciphertext.txt", "w");                   //opening file to write ciphertext
+    if(fp == NULL)
+    {
+        printf("File doesnt exist");                            //If file is not available give error message
+    }
+    if(fgets(str, sizeof(str), fp)!=NULL)                       //read and store the characters from plaintext file
+    {
+        //printf("%s", str);
+
+    printf("Enter the key:");
+    fgets(key, SIZE, stdin);                                    //read and store the key from console user
+     ciphertext=encrypt(key, str);                              //calling encrypt function
+    fprintf(fp1, "%s", ciphertext);                             //writing ciphertext to the output file
+    }
+    fclose(fp);
+    fclose(fp1);                                                //closing both input and output files
+    return 0;
+}
